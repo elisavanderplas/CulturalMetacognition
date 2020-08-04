@@ -1,4 +1,4 @@
-# vdPlasetal2020
+# CulturalMetacognition_2020
 Isolating cultural contributions to metacognition
 
 This repository contains analysis code and data for Van der Plas, Zhang, Dong, Bang, Li, Wright & Fleming (in prep) “Isolating cultural contributions to metacognition” [..]
