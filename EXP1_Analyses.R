@@ -1,10 +1,4 @@
 ## EVDP 2019 elisa.plas.18@ucl.ac.uk
-## 18/06/19: EVDP added dummy-coded coherence (-0.5: weak, 0: med, 0.5: str.)
-
-# Behavioural regression models for Fleming, van der Putten & Daw
-# Adapted from Steve Fleming 2016 stephen.fleming@ucl.ac.uk 
-
-# Analyses Experiment 1 and computes effect size used for Fig 1D
 
 rm(list=ls())
 require(R.matlab) 
@@ -20,12 +14,12 @@ nat = c('PKU', 'UCL')
 j=1
 for (d in 1:2) {
   if (d == 1) {
-    dataDir = "~/Dropbox/PKU_collaboration/Github/DATA/EXP1/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/PKU_data/PKU_data/"
     filePrefix = "fMRI_pilotData_sub_"
     suffix = "_2"
     subjects =c(seq(101,109), seq(111,115), seq(117,141))
   } else if (d == 2) {
-    dataDir = "~/Dropbox/PKU_collaboration/Github/DATA/EXP1/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/UCL_data/UCL_data/"
     filePrefix = "fMRI_pilotData_sub_"
     suffix = "_2"
     subjects = c(seq(201,204), seq(206, 227), seq(229, 234), seq(236,242))
@@ -156,7 +150,7 @@ error_coef_PKU = lmer(conf ~ precoh_cat*postcoh_cat + logRT + (1 +  precoh_cat*p
 fix <- fixef(error_coef_PKU)
 fix.se <- sqrt(diag(vcov(error_coef_PKU)))
 betas <- c(fix, fix.se)
-setwd("~/Dropbox/PKU_collaboration/Github/DATA/EXP1/PKU_data/PKU_data/PKU_betas/")
+setwd("~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/PKU_data/PKU_data/PKU_betas/")
 write.csv(betas, file = paste('regression_betas_err_PKU.csv'))
 
 # correct, PKU 
@@ -173,7 +167,7 @@ error_coef_UCL = lmer(conf ~ precoh_cat*postcoh_cat + logRT + (1 +  precoh_cat*p
 fix <- fixef(error_coef_UCL)
 fix.se <- sqrt(diag(vcov(error_coef_UCL)))
 betas <- c(fix, fix.se)
-setwd("~/Dropbox/PKU_collaboration/Github/DATA/EXP1/UCL_data/UCL_data/UCL_betas/")
+setwd("~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/UCL_data/UCL_data/UCL_betas/")
 write.csv(betas, file = paste('regression_betas_err_UCL.csv'))
 
 # correct, UCL

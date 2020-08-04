@@ -1,5 +1,4 @@
-% Steve Fleming stephen.fleming@ucl.ac.uk 2017
-% Adapted by Elisa van der Plas elisavanderplas@gmail.com
+% elisa.plas.18@ucl.ac.uk
 
 clear all; close all
 fs = filesep;
@@ -16,7 +15,7 @@ sj_mat = {[12:28,30:37]; [201:204, 206:227, 229:234, 236:242];[101:109, 111:115,
 for n = 1:length(culture)
     nat = culture{n};
     subjects = sj_mat{n};
-    baseDir = '~/Dropbox/PKU_collaboration/Github/DATA/EXP1/';
+    baseDir = '~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/';
     dirData = [baseDir  nat '_data/' nat '_data/' ];
     cwd = pwd;
     filename = 'fMRI_pilotData_sub_';
@@ -76,12 +75,10 @@ for n = 1:length(culture)
     for cor = 1:2
         correct = {'corr_'; 'err_'}; 
         
-    suffix = correct{cor}; % use for fMRI data out-of-scanner
-    %% Load data for this dataset
-    datafile = [filename suffix nat '.csv']; %betas
+    suffix = correct{cor}; 
+    datafile = [filename suffix nat '.csv']; 
     dat_acc{n, cor} = readtable(datafile);
     end
-    % specify betas
     b_acc(n)= dat{n}{2,2};
     b_pre(n)= dat{n}{3,2};
     b_pos(n)= dat{n}{4,2};
@@ -111,7 +108,7 @@ for pre = 1:3
         mean_conf_err{n} = nanmean(conf_err{n}(:,pre,:));
         sem_conf_err{n} = nanstd(conf_err{n}(:,pre,:))./sqrt(len_subj{n});
         
-        % Corrects - model
+        % Corrects
         for group = 1
             x = xpos((group*3)-2:group*3);
             mu = mean_conf_cor{n}((group*3)-2:group*3);
@@ -125,7 +122,7 @@ for pre = 1:3
             hLine(1,n) = plot(x, squeeze(mu), marker{n}, 'markersize', ms, 'Color', c.corr{n},'markerfacecolor', 'w', 'MarkerEdgeColor', c.corr{n},'LineWidth', 3);
         end
         
-        % Corrects - subjects
+        % Errors
         for group = 1
             x = xpos((group*3)-2:group*3);
             mu = mean_conf_err{n}((group*3)-2:group*3);
@@ -162,7 +159,6 @@ set(linehandle, 'LineWidth',6)
 legend boxoff
 texthandle = findobj(handle, 'type', 'text');
 set(texthandle,'FontSize',axis_nr);
-
 
 % specify variables
 acc_v= [-1 1];

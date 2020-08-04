@@ -1,7 +1,5 @@
 % Plot some characteristics of the data from all three cultures next to each other
-
 % EVDP 2019 elisa.plas.18@ucl.ac.uk
-% Adapted from Steve Fleming 2016 stephen.fleming@ucl.ac.uk 
 
 clear all;close all
 fs = filesep;
@@ -13,19 +11,18 @@ s01 = figure;
 set(s01,'units','points','position',[10,10,1000,800])
 
 %set path to PsychFit function
-addpath('~/Dropbox/PKU_collaboration/Github/tools/psychFit-master')
+addpath('~/Dropbox/CulturalMetacognition_2020/tools/psychFit-master')
 
 %Colours
 c.corr =  {[0.019, 0.211, 0.501],[0.4, 0.650, 0.976], [0 0.45 0.74]};
 c.err = {[0.372, 0.164, 0.007], [0.976, 0.580, 0.4], [0.768, 0.337, 0.011]};
-%http://doc.instantreality.org/tools/color_calculator/
 
 avrg_mean_coh = cell(1,3);
 acc1 = repmat(NaN,length(sj_mat), length(sj_mat{1}));
 for n = 1:length(culture)
     nat = culture{n};
 
-    baseDir = '~/Dropbox/PKU_collaboration/Github/DATA/EXP1/';
+    baseDir = '~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/';
     dirData = [baseDir nat '_data/' nat '_data/' ];           
 
     cwd = pwd;
@@ -76,7 +73,6 @@ for n = 1:length(culture)
         %store in 3D matrix w/ 1st dimension=sj
         pred1(s,:) = cumNormPred(base1, fitparams1(1), fitparams1(2));
          
-        %% Load task data for this subject
         datafile = [filename num2str(subjects(s)) '_2.mat'];
         cd(dirData);
         load(datafile);
@@ -180,7 +176,7 @@ for n = 1:length(culture)
         ylabel('P(right)', 'FontSize', 20);
     
 end
-
+%disp the stats
 %%accuracy contrasts calibration
 disp(['average accuracy calibration in PKU : ' num2str(mean(acc1(1,:)))]);
 disp(['average accuracy calibration in UCL : ' num2str(mean(acc1(2,:)))]);

@@ -1,22 +1,18 @@
 %% Plot Fig2 of PKU-UCL paper
 % EVDP 2019 elisa.plas.18@ucl.ac.uk
-% Adapted from Steve Fleming 2016 stephen.fleming@ucl.ac.uk
-
-close all
 fs = filesep;
 
 culture = {'PKU', 'UCL'};
 sj_mat = {[101:109, 111:115, 117:141],[201:204, 206:227, 229:234, 236:242]};
 
 h01 = figure;
-%set fig properties
 set(h01,'units','points','position',[10,10,1400,600])
 c.corr =  [0.082, 0.615, 0.835];
 c.err = [0.835, 0.250, 0.082];
 
 for n = 1:length(culture)
     nat = culture{n};
-    baseDir =  ['~' fs 'Dropbox' fs 'PKU_collaboration' fs 'Github' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs];
     dirData = [baseDir 'DATA' fs 'EXP1' fs nat '_data' fs nat '_data' fs];
     
     filename = 'regression_betas_'; %made in R with 'Regression_EXP1.r'

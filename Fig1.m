@@ -1,8 +1,5 @@
 %% Plot Fig1 of PKU-UCL paper
 % EVDP 2019 elisa.plas.18@ucl.ac.uk
-% Adapted from Steve Fleming 2016 stephen.fleming@ucl.ac.uk 
-
-close all
 fs = filesep;
 
 culture = {'PKU', 'UCL'};
@@ -16,7 +13,7 @@ linestyle = {'d', 'o'};
 
 for n = 1:length(culture)
     nat = culture{n};
-    baseDir =  ['~' fs 'Dropbox' fs 'PKU_collaboration' fs 'Github' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs];
     dirData = [baseDir 'DATA' fs 'EXP1' fs nat '_data' fs nat '_data' fs];
        
     filename = 'fMRI_pilotData_sub_';    

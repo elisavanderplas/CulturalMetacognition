@@ -1,14 +1,9 @@
 %% Plots confidence of advisers in PKU and UCL (supplementary material 2.3)
-
 % EVDP 2019 elisa.plas.18@ucl.ac.uk
-% Adapted from Steve Fleming 2016 stephen.fleming@ucl.ac.uk 
 
-clear all; close all
 fs = filesep;
-
 c.corr = {[0.647, 0.835, 0.521],[0.368, 0.713, 0.145],[0.250, 0.415, 0.145]};
 c.err = {[0.909, 0.784, 0.772],[0.850, 0.070, 0.070], [0.709, 0.090, 0.031]};
-%http://doc.instantreality.org/tools/color_calculator/
 
 %% discret. 33% quant. and save in three bins
 allConf_adviser = cell(1,3);
@@ -29,8 +24,7 @@ for n = 1:length(culture)
     subjects = sj_mat{n};
     
     for s = 1:length(subjects)
-        
-        %% Load data for this subject
+
         datafile = [filename num2str(subjects(s)) '_2.mat'];
         cd(dirData);
         load(datafile);

@@ -1,14 +1,8 @@
-%% plots x plot in supplementary material 2.3
-clear all; close all
-
+%% supplementary material 2.3
 fs = filesep;
-
-cwd = pwd;
 
 culture = {'PKU'; 'UCL'};
 sj_mat = {[403:418, 420:432, 434:435, 437:443, 445:459]; [25:76, 79]};
-
-%Colours, http://doc.instantreality.org/tools/color_calculator/
 c.corr =  {[0.117, 0.447, 0.662],[0.560, 0.803, 0.898]};
 c.err = {[0.909, 0.784, 0.772], [0.709, 0.090, 0.031]};
   
@@ -18,7 +12,7 @@ set(s05,'units','points','position',[10,10,1300,500])
 for n = 1:length(culture)
     nat = culture{n};
     
-    baseDir =  ['~' fs 'Dropbox' fs 'PKU_collaboration' fs 'Github' fs 'DATA' fs 'EXP2' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs 'DATA' fs 'EXP2' fs];
     dirData = [baseDir nat '_data' fs nat '_data' fs];
 
     filename = 'fMRI_pilotData_sub_';   
@@ -105,9 +99,9 @@ for n = 1:length(culture)
         correct = {'err_'; 'corr_'};
         for agr = 1:2
             agree = {'da'; 'a'};
-            suffix = correct{cor}; % use for fMRI data out-of-scanner
+            suffix = correct{cor}; 
             suffix2 = agree{agr};
-            %% Load data for this dataset
+ 
             cd(betaDir);
             datafile = [filename suffix suffix2 '_' nat '.csv'];
             dat{n,cor, agr} = readtable(datafile);

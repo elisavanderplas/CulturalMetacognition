@@ -1,6 +1,4 @@
 ## EVDP 2019 elisa.plas.18@ucl.ac.uk
-## Adapted from Steve Fleming 2016 stephen.fleming@ucl.ac.uk 
-
 ## Analyses section 2.4 from Supplementary Material
 
 rm(list=ls())
@@ -15,13 +13,13 @@ j=1
 for (d in 1:2) {
   if (d == 1) {
     dataset = "PKU"
-    dataDir = "~/Dropbox/PKU_collaboration/Github/DATA/EXP2/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/PKU_data/PKU_data/"
     filePrefix = "fMRI_pilotData_sub_"
     suffix = "_2"
     subjects = c(403, seq(404,418), seq(420,432), seq(434,435), seq(437,443), seq(445,459))
   } else if ( d == 2) {
     dataset = "UCL"
-    dataDir = "~/Dropbox/PKU_collaboration/Github/DATA/EXP2/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/UCL_data/UCL_data/"
     filePrefix = "fMRI_pilotData_sub_"
     suffix = "_2"
     subjects =c(seq(25,76), 79) 

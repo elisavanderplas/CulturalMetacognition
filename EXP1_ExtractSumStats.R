@@ -1,7 +1,4 @@
 ## EVDP 2019 elisa.plas.18@ucl.ac.uk
-## 18/06/19: EVDP added dummy-coded coherence (-0.5: weak, 0: med, 0.5: str.)
-
-## Adapted from Steve Fleming 2016 stephen.fleming@ucl.ac.uk 
 
 rm(list=ls())
 require(R.matlab) 
@@ -16,12 +13,12 @@ j=1
 for (d in 1:2) {
   if (d == 1) {
     dataset = "PKU"
-    dataDir = "~/Dropbox/PKU_collaboration/Github/DATA/EXP1/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/PKU_data/PKU_data/"
     filePrefix = "fMRI_pilotData_sub_"
     suffix = "_2"
     subjects =c(seq(101,109), seq(111,115), seq(117,141))
   } else if (d == 2) {
-    dataDir = "~/Dropbox/PKU_collaboration/Github/DATA/EXP1/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/UCL_data/UCL_data/"
     filePrefix = "fMRI_pilotData_sub_"
     suffix = "_2"
     subjects = c(seq(201,204), seq(206, 227), seq(229, 234), seq(236,242))
@@ -90,5 +87,5 @@ for (d in 1:2) {
 bigData$subj <- factor(bigData$subj)
 bigData$country <- factor(bigData$country, levels = c(1,2), labels = c("PKU", "UCL"))
 
-setwd("~/Dropbox/PKU_collaboration/Github/DATA/EXP1/")
+setwd("~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/")
 write.csv(bigData,file = paste('regression_betas_IDs_EXP1.csv'))

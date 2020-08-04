@@ -1,9 +1,5 @@
 %% Plot first-order performance in the social and non-social condition of Exp 2
-
-% EVDP 2019 elisa.plas.18@ucl.ac.uk
-% Adapted from Steve Fleming 2016 stephen.fleming@ucl.ac.uk 
-
-clear all; close all; fs = filesep;
+fs = filesep;
 
 culture = {'PKU';'UCL'};
 sj_mat = {[403:418, 420:432, 434:435, 437:443, 445:459]; [25:76, 79]}; 
@@ -20,10 +16,8 @@ linestyle = {'d', 'o'};
 for n = 1:length(culture)
     nat = culture{n};
 
-    baseDir =  ['~' fs 'Dropbox' fs 'PKU_collaboration' fs 'Github' fs];
-    dirData = [baseDir 'DATA' fs 'EXP2' fs nat '_data' fs nat '_data' fs];
-
-    cwd = pwd;    
+    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs];
+    dirData = [baseDir 'DATA' fs 'EXP2' fs nat '_data' fs nat '_data' fs]; 
 
     filename = 'fMRI_pilotData_sub_'; 
     suffix = '';

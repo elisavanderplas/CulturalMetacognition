@@ -1,7 +1,4 @@
 ## EVDP 2019 elisa.plas.18@ucl.ac.uk
-## 18/06/19: EVDP added dummy-coded coherence (-0.5: weak, 0: med, 0.5: str.)
-
-## Adapted from Steve Fleming 2016 stephen.fleming@ucl.ac.uk 
 
 rm(list=ls())
 require(R.matlab) 
@@ -18,13 +15,13 @@ j=1
 for (d in 1:2) {
   if (d == 1) {
     dataset = "PKU"
-    dataDir = "~/Dropbox/PKU_collaboration/Github/DATA/EXP2/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/PKU_data/PKU_data/"
     filePrefix = "fMRI_pilotData_sub_"
     suffix = "_2"
     subjects = c(403, seq(404,418), seq(420,432), seq(434,435), seq(437,443), seq(445,459))
   } else if ( d == 2) {
     dataset = "UCL"
-    dataDir = "~/Dropbox/PKU_collaboration/Github/DATA/EXP2/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/UCL_data/UCL_data/"
     filePrefix = "fMRI_pilotData_sub_"
     suffix = "_2"
     subjects =c(seq(25,76), 79) 
@@ -161,7 +158,7 @@ error_coef_PKU = lmer(conf ~ precoh_cat*postcoh_cat + logRT + (1 +  precoh_cat*p
 fix <- fixef(error_coef_PKU)
 fix.se <- sqrt(diag(vcov(error_coef_PKU)))
 betas <- c(fix, fix.se)
-setwd('~/Dropbox/PKU_collaboration/Github/DATA/EXP2/PKU_data/PKU_data/PKU_betas/')
+setwd('~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/PKU_data/PKU_data/PKU_betas/')
 write.csv(betas, file = paste('regression_betas_EXP2_S_err_PKU.csv'))
 
 # correct, PKU 
@@ -178,7 +175,7 @@ error_coef_UCL = lmer(conf ~ precoh_cat*postcoh_cat + logRT + (1 +  precoh_cat*p
 fix <- fixef(error_coef_UCL)
 fix.se <- sqrt(diag(vcov(error_coef_UCL)))
 betas <- c(fix, fix.se)
-setwd('~/Dropbox/PKU_collaboration/Github/DATA/EXP2/UCL_data/UCL_data/UCL_betas/')
+setwd('~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/UCL_data/UCL_data/UCL_betas/')
 write.csv(betas, file = paste('regression_betas_EXP2_S_err_UCL.csv'))
 
 # correct, UCL
