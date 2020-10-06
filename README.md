@@ -6,7 +6,6 @@ This repository contains analysis code and data for Van der Plas, Zhang, Dong, B
 Anonymised behavioural data files are included in the repository to enable replication of the analyses and a reproduction of the figures in the manuscript. 
 
 If you simply download the folder to Dropbox the paths should work without changing the code
-Any questions please contact: elisavanderplas AT gmail DOT com
 
 # We make use of the following packages under R:
 
