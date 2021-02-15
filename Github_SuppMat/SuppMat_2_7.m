@@ -7,7 +7,7 @@ fs = filesep;
 surveydat = []; 
 
 %beta coefficients impact of pre, post and post x accuracy interaction in Exp 1 (made with EXP2_ExtractSumStats.R). 
-baseDir2 = ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs 'DATA' fs 'EXP2'] ;
+baseDir2 = ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs 'DATA' fs 'EXP2'] ;
 filename2 = 'regression_betas_IDs_EXP2.csv';    % use for fMRI
 cd(baseDir2);
 temp= readtable(filename2,'TreatAsEmpty',{'.','NA'});

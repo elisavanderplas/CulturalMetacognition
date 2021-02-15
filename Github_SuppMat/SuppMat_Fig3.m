@@ -17,10 +17,10 @@ sj_mat = {[403:418, 420:432, 434:435, 437:443, 445:459];[25:76,79]};
 for n = 1:length(culture)
     nat = culture{n};
     
-    baseDir =  ['~' fs 'Dropbox' fs 'PKU_collaboration' fs 'Github' fs 'DATA' fs 'EXP2' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs 'DATA' fs 'EXP2' fs];
     dirData = [baseDir nat '_data' fs nat '_data' fs];
    
-    filename = 'fMRI_pilotData_sub_';   
+    filename = 'Data_sub_';   
     subjects = sj_mat{n};
     
     for s = 1:length(subjects)

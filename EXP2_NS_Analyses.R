@@ -1,4 +1,5 @@
 ## EVDP 2019 elisa.plas.18@ucl.ac.uk
+# This script replicates the Results section of Experiment 2 in chronological order
 
 rm(list=ls())
 require(R.matlab) 
@@ -14,14 +15,14 @@ j=1
 for (d in 1:2) {
   if (d == 1) {
     dataset = "PKU"
-    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/PKU_data/PKU_data/"
-    filePrefix = "fMRI_pilotData_sub_"
+    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP2/PKU_data/PKU_data/"
+    filePrefix = "Data_sub_"
     suffix = "_2"
     subjects = c(403, seq(404,418), seq(420,432), seq(434,435), seq(437,443), seq(445,459))
   } else if ( d == 2) {
     dataset = "UCL"
-    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/UCL_data/UCL_data/"
-    filePrefix = "fMRI_pilotData_sub_"
+    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP2/UCL_data/UCL_data/"
+    filePrefix = "Data_sub_"
     suffix = "_2"
     subjects =c(seq(25,76), 79) 
   }
@@ -104,21 +105,36 @@ bigData_UCL_incorrect <- bigData_nonsocial[bigData_nonsocial$country == "UCL" & 
 PKU = c(demoData[1:length(subjects),])
 UCL = c(demoData[length(subjects)+1:nrow(demoData),])
 
+## Demographics described at start of Results section (for Supplementary Table 1, see Github_SuppMat/1.1.Demo.R)
+#age
+mean(PKU$age, na.rm = T)
+sd(PKU$age, na.rm = T)/sqrt(length(subjects))
+mean(UCL$age, na.rm = T)
+sd(UCL$age, na.rm = T)/sqrt(length(subjects))
+t.test(PKU$age, UCL$age, var.equal = T)
+#gender
+mean(PKU$gender, na.rm = T)
+mean(UCL$gender, na.rm = T)
+t.test(PKU$gender, UCL$gender, var.equal = T)
+#IQ
+mean(PKU$IQ, na.rm = T)
+sd(PKU$IQ, na.rm = T)/sqrt(length(subjects))
+mean(UCL$IQ, na.rm = T)
+sd(UCL$IQ, na.rm = T)/sqrt(length(subjects))
+t.test(PKU$IQ, UCL$IQ, var.equal = T)
+#relative to PPP difference UK/China
+UCL$income = UCL$income/1.71
+mean(PKU$income, na.rm = T)
+sd(PKU$income, na.rm = T)/sqrt(length(subjects))
+mean(UCL$income, na.rm = T)
+sd(UCL$income, na.rm = T)/sqrt(length(subjects))
+t.test(PKU$income, UCL$income, var.equal = T)
+#BCIS
 mean(PKU$BCIS, na.rm = T)
+sd(PKU$BCIS, na.rm = T)/sqrt(length(subjects))
 mean(UCL$BCIS, na.rm = T)
+sd(UCL$BCIS, na.rm = T)/sqrt(length(subjects)) 
 t.test(PKU$BCIS, UCL$BCIS, var.equal = T)
-
-mean(PKU$BCIS_SR, na.rm = T)
-mean(UCL$BCIS_SR, na.rm = T)
-t.test(PKU$BCIS_SR, UCL$BCIS_SR, var.equal = T)
-
-mean(PKU$BCIS_SC, na.rm = T)
-mean(UCL$BCIS_SC, na.rm = T)
-t.test(PKU$BCIS_SC, UCL$BCIS_SC, var.equal = T)
-
-mean(PKU$hol_tot, na.rm = T)
-mean(UCL$hol_tot, na.rm = T)
-t.test(PKU$hol_tot, UCL$hol_tot, var.equal = T)
 
 ## SECOND-ORDER PERFORMANCE
 confModel_wcountry = lmer(conf ~ country*(accuracy + precoh_cat + postcoh_cat + precoh_cat:postcoh_cat + precoh_cat:accuracy + postcoh_cat:accuracy + precoh_cat:postcoh_cat:accuracy + logRT) + (1 + accuracy + precoh_cat + postcoh_cat + precoh_cat:postcoh_cat + precoh_cat:accuracy + postcoh_cat:accuracy + precoh_cat:postcoh_cat:accuracy + logRT|subj), data=bigData_nonsocial
@@ -137,7 +153,7 @@ error_coef_PKU = lmer(conf ~ precoh_cat*postcoh_cat + logRT + (1 +  precoh_cat*p
 fix <- fixef(error_coef_PKU)
 fix.se <- sqrt(diag(vcov(error_coef_PKU)))
 betas <- c(fix, fix.se)
-setwd('~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/PKU_data/PKU_data/PKU_betas/')
+setwd('~/Dropbox/CulturalMetacognition-master/DATA/EXP2/PKU_data/PKU_data/PKU_betas/')
 write.csv(betas, file = paste('regression_betas_EXP2_NS_err_PKU.csv'))
 
 # correct, PKU 
@@ -154,7 +170,7 @@ error_coef_UCL = lmer(conf ~ precoh_cat*postcoh_cat + logRT + (1 +  precoh_cat*p
 fix <- fixef(error_coef_UCL)
 fix.se <- sqrt(diag(vcov(error_coef_UCL)))
 betas <- c(fix, fix.se)
-setwd('~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/UCL_data/UCL_data/UCL_betas/')
+setwd('~/Dropbox/CulturalMetacognition-master/DATA/EXP2/UCL_data/UCL_data/UCL_betas/')
 write.csv(betas, file = paste('regression_betas_EXP2_NS_err_UCL.csv'))
 
 # correct, UCL

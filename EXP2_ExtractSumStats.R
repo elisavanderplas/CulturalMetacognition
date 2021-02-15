@@ -13,14 +13,14 @@ j=1
 for (d in 1:2) {
   if (d == 1) {
     dataset = "PKU"
-    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/PKU_data/PKU_data/"
-    filePrefix = "fMRI_pilotData_sub_"
+    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP2/PKU_data/PKU_data/"
+    filePrefix = "Data_sub_"
     suffix = "_2"
     subjects = c(403, seq(404,418), seq(420,432), seq(434,435), seq(437,443), seq(445,459))
   } else if ( d == 2) {
     dataset = "UCL"
-    dataDir = "~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/UCL_data/UCL_data/"
-    filePrefix = "fMRI_pilotData_sub_"
+    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP2/UCL_data/UCL_data/"
+    filePrefix = "Data_sub_"
     suffix = "_2"
     subjects =c(seq(25,76), 79) 
   }
@@ -124,5 +124,5 @@ for (d in 1:2) {
 bigData$subj <- factor(bigData$subj)
 bigData$country <- factor(bigData$country, levels = c(1,2), labels = c("PKU", "UCL"))
 
-setwd("~/Dropbox/CulturalMetacognition_2020/DATA/EXP2/")
+setwd("~/Dropbox/CulturalMetacognition-master/DATA/EXP2/")
 write.csv(bigData,file = paste('regression_betas_IDs_EXP2.csv'))

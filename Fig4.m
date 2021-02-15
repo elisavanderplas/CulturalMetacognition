@@ -16,18 +16,18 @@ h03 = figure;
 set(h03,'units','points','position',[10,10,1600,600])
 
 %set path to used toolboxes
-addpath(['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs 'tools' fs 'Corr_toolbox_v2']); 
-addpath(['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs 'tools' fs 'Corr_toolbox_v2' fs 'LIBRA']);
+addpath(['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs 'tools' fs 'Corr_toolbox_v2']); 
+addpath(['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs 'tools' fs 'Corr_toolbox_v2' fs 'LIBRA']);
    
 %load betas Exp 1, made in R with 'EXP1_ExtractSumStats.r 
-baseDir1 = ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs 'DATA' fs 'EXP1'] ;
+baseDir1 = ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs 'DATA' fs 'EXP1'] ;
 cd(baseDir1);
 fn = 'regression_betas_IDs_EXP1.csv'; 
 temp = readtable(fn,'TreatAsEmpty',{'.','NA'});
 b_ns_accpost_exp1= table2array(temp(:,6));
 
 %load betas Exp 2, made in R with 'EXP2_ExtractSumStats.r'
-baseDir2 = ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs 'DATA' fs 'EXP2'] ;
+baseDir2 = ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs 'DATA' fs 'EXP2'] ;
 fn = 'regression_betas_IDs_EXP2.csv';  
 cd(baseDir2);
 temp= readtable(fn,'TreatAsEmpty',{'.','NA'});
@@ -40,7 +40,7 @@ subplot(3,2,[1,3,5])
 %load betas Exp 1, made in R with 'EXP1_Analyses.R' line 170-203
 for n = 1:length(culture)
     nat = culture{n};
-    baseDir1 = ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs 'DATA' fs 'EXP1'] ;
+    baseDir1 = ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs 'DATA' fs 'EXP1'] ;
     dirData = [baseDir1 fs nat '_data' fs nat '_data' fs nat '_betas' fs]; 
     filename = 'regression_betas_';  
     
@@ -52,7 +52,7 @@ for n = 1:length(culture)
         dat1{n, acc} = readtable(datafile);
     end
     
-    baseDir2 = ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs 'DATA' fs 'EXP2'] ;
+    baseDir2 = ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs 'DATA' fs 'EXP2'] ;
     dirData = [baseDir2  fs nat '_data' fs nat '_data' fs nat '_betas' fs];   
     %load betas Exp 2, made with 'EXP2_NS_Analyses.r' line 132-165 and 'EXP2_S_Analyses.r' line 164-210
     for acc = 1:2

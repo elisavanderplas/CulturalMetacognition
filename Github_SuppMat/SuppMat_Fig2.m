@@ -15,19 +15,17 @@ sj_mat = {[12:28,30:37]; [201:204, 206:227, 229:234, 236:242];[101:109, 111:115,
 for n = 1:length(culture)
     nat = culture{n};
     subjects = sj_mat{n};
-    baseDir = '~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/';
+    baseDir = '~/Dropbox/CulturalMetacognition-master/DATA/EXP1/';
     dirData = [baseDir  nat '_data/' nat '_data/' ];
     cwd = pwd;
-    filename = 'fMRI_pilotData_sub_';
-    suffix = '';
+    filename = 'Data_sub_';
     
     for s = 1:length(subjects)
         
         %% Load data for this subject
-        datafile = [filename num2str(subjects(s)) suffix '_2.mat'];
+        datafile = [filename num2str(subjects(s)) '_2.mat'];
         cd(dirData);
         load(datafile);
-        cd(cwd);
         
         precoh_index = [];
         postcoh_index = [];

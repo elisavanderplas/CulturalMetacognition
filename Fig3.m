@@ -16,20 +16,18 @@ linestyle = {'d', 'o'};
 for n = 1:length(culture)
     nat = culture{n};
 
-    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs];
     dirData = [baseDir 'DATA' fs 'EXP2' fs nat '_data' fs nat '_data' fs]; 
 
-    filename = 'fMRI_pilotData_sub_'; 
-    suffix = '';
+    filename = 'Data_sub_'; 
     subjects = sj_mat{n};
     
     for s = 1:length(subjects)
         
         %% Load data for this subject
-        datafile = [filename num2str(subjects(s)) suffix '_2.mat'];
+        datafile = [filename num2str(subjects(s)) '_2.mat'];
         cd(dirData);
         load(datafile);
-        cd(cwd);
         
         precoh_index = [];
         precoh = locDATA.dots_coherence';

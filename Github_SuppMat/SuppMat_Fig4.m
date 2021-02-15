@@ -12,11 +12,10 @@ set(s05,'units','points','position',[10,10,1300,500])
 for n = 1:length(culture)
     nat = culture{n};
     
-    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition_2020' fs 'DATA' fs 'EXP2' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs 'DATA' fs 'EXP2' fs];
     dirData = [baseDir nat '_data' fs nat '_data' fs];
 
-    filename = 'fMRI_pilotData_sub_';   
-    suffix = '';
+    filename = 'Data_sub_';   
     subjects = sj_mat{n};
     cwd = pwd;
     
@@ -30,7 +29,7 @@ for n = 1:length(culture)
     da_err_a{n} = [];
     
     for s = 1:length(subjects)
-        datafile = [filename num2str(subjects(s)) suffix '_2.mat']; %actual task data
+        datafile = [filename num2str(subjects(s)) '_2.mat']; %actual task data
         cd(dirData);
         load(datafile, 'locDATA');
         

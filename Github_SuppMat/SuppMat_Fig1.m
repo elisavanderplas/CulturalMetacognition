@@ -11,7 +11,7 @@ s01 = figure;
 set(s01,'units','points','position',[10,10,1000,800])
 
 %set path to PsychFit function
-addpath('~/Dropbox/CulturalMetacognition_2020/tools/psychFit-master')
+addpath('~/Dropbox/CulturalMetacognition-master/tools/psychFit-master')
 
 %Colours
 c.corr =  {[0.019, 0.211, 0.501],[0.4, 0.650, 0.976], [0 0.45 0.74]};
@@ -22,14 +22,14 @@ acc1 = repmat(NaN,length(sj_mat), length(sj_mat{1}));
 for n = 1:length(culture)
     nat = culture{n};
 
-    baseDir = '~/Dropbox/CulturalMetacognition_2020/DATA/EXP1/';
+    baseDir = '~/Dropbox/CulturalMetacognition-master/DATA/EXP1/';
     dirData = [baseDir nat '_data/' nat '_data/' ];           
 
     cwd = pwd;
     accuracy{n} = [];  
     coherence{n} = []; 
     
-    filename = 'fMRI_pilotData_sub_';   
+    filename = 'Data_sub_';   
     subjects = sj_mat{n};
     
     %% Sort subject data
