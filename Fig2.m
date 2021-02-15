@@ -12,7 +12,7 @@ c.err = [0.835, 0.250, 0.082];
 
 for n = 1:length(culture)
     nat = culture{n};
-    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition' fs];
     dirData = [baseDir 'DATA' fs 'EXP1' fs nat '_data' fs nat '_data' fs];
     
     filename = 'regression_betas_'; %made in R with 'Regression_EXP1.r'

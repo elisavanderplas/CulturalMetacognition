@@ -16,7 +16,7 @@ linestyle = {'d', 'o'};
 for n = 1:length(culture)
     nat = culture{n};
 
-    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition' fs];
     dirData = [baseDir 'DATA' fs 'EXP2' fs nat '_data' fs nat '_data' fs]; 
 
     filename = 'Data_sub_'; 

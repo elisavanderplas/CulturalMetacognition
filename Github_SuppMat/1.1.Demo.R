@@ -14,12 +14,12 @@ nat = c('PKU', 'UCL')
 j=1
 for (d in 1:2) {
   if (d == 1) {
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP1/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP1/PKU_data/PKU_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects =c(seq(101,109), seq(111,115), seq(117,141))
   } else if (d == 2) {
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP1/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP1/UCL_data/UCL_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects = c(seq(201,204), seq(206, 227), seq(229, 234), seq(236,242))
@@ -136,13 +136,13 @@ j=1
 for (d in 1:2) {
   if (d == 1) {
     dataset = "PKU"
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP2/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP2/PKU_data/PKU_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects = c(403, seq(404,418), seq(420,432), seq(434,435), seq(437,443), seq(445,459))
   } else if ( d == 2) {
     dataset = "UCL"
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP2/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP2/UCL_data/UCL_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects =c(seq(25,76), 79) 

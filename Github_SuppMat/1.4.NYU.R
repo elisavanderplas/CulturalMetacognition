@@ -10,17 +10,17 @@ bigData = NULL
 j=1
 for (d in 1:3) {
   if (d == 1) {
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP1/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP1/PKU_data/PKU_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects =c(seq(101,109), seq(111,115), seq(117,141))
   } else if ( d == 2) {
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP1/NYU_data/NYU_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP1/NYU_data/NYU_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects = c(seq(12,28), seq(30,37))
   } else if (d == 3) {
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP1/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP1/UCL_data/UCL_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects = c(seq(201,204), seq(206, 227), seq(229, 234), seq(236,242))
@@ -99,7 +99,7 @@ coef(summary(confModel_PKU))
 fix <- fixef(confModel_PKU)
 fix.se <- sqrt(diag(vcov(confModel_PKU)))
 betas <- c(fix, fix.se)
-setwd("~/Dropbox/CulturalMetacognition-master/DATA/EXP1/PKU_data/PKU_data/PKU_betas/")
+setwd("~/Dropbox/CulturalMetacognition/DATA/EXP1/PKU_data/PKU_data/PKU_betas/")
 write.csv(betas, file = paste('regression_betas_PKU.csv'))
 
 confModel_UCL = lmer(conf ~ accuracy + precoh_cat + postcoh_cat + precoh_cat:accuracy + postcoh_cat:accuracy + precoh_cat:postcoh_cat + precoh_cat:postcoh_cat:accuracy + logRT + (1 + accuracy + precoh_cat + postcoh_cat + precoh_cat:accuracy + postcoh_cat:accuracy + precoh_cat:postcoh_cat + precoh_cat:postcoh_cat:accuracy + logRT|subj), data=bigData_UCL
@@ -113,7 +113,7 @@ coef(summary(confModel_UCL))
 fix <- fixef(confModel_UCL)
 fix.se <- sqrt(diag(vcov(confModel_UCL)))
 betas <- c(fix, fix.se)
-setwd("~/Dropbox/CulturalMetacognition-master/DATA/EXP1/UCL_data/UCL_data/UCL_betas/")
+setwd("~/Dropbox/CulturalMetacognition/DATA/EXP1/UCL_data/UCL_data/UCL_betas/")
 write.csv(betas, file = paste('regression_betas_UCL.csv'))
 
 #Main replication in the new datasets (Supplementary Material 1.4)
@@ -122,7 +122,7 @@ confModel_NYU = lmer(conf ~ accuracy + precoh_cat + postcoh_cat + precoh_cat:acc
 fix <- fixef(confModel_NYU)
 fix.se <- sqrt(diag(vcov(confModel_NYU)))
 betas <- c(fix, fix.se)
-setwd("~/Dropbox/CulturalMetacognition-master/DATA/EXP1/NYU_data/NYU_data/NYU_betas/")
+setwd("~/Dropbox/CulturalMetacognition/DATA/EXP1/NYU_data/NYU_data/NYU_betas/")
 write.csv(betas, file = paste('regression_betas_NYU.csv'))
 
 #contrasts between 3 countries with PKU as baseline (Supplementary Material 1.5)
@@ -142,7 +142,7 @@ error_coef_NYU = lmer(conf ~ precoh_cat*postcoh_cat + logRT + (1 +  precoh_cat*p
 fix <- fixef(error_coef_NYU)
 fix.se <- sqrt(diag(vcov(error_coef_NYU)))
 betas <- c(fix, fix.se)
-setwd("~/Dropbox/CulturalMetacognition-master/DATA/EXP1/NYU_data/NYU_data/NYU_betas/")
+setwd("~/Dropbox/CulturalMetacognition/DATA/EXP1/NYU_data/NYU_data/NYU_betas/")
 write.csv(betas, file = paste('regression_betas_err_NYU.csv'))
 
 # correct, NYU

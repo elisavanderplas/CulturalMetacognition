@@ -15,12 +15,12 @@ nat = c('PKU', 'UCL')
 j=1
 for (d in 1:2) {
   if (d == 1) {
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP1/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP1/PKU_data/PKU_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects =c(seq(101,109), seq(111,115), seq(117,141))
   } else if (d == 2) {
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP1/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP1/UCL_data/UCL_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects = c(seq(201,204), seq(206, 227), seq(229, 234), seq(236,242))
@@ -150,7 +150,7 @@ error_coef_PKU = lmer(conf ~ precoh_cat*postcoh_cat + logRT + (1 +  precoh_cat*p
 fix <- fixef(error_coef_PKU)
 fix.se <- sqrt(diag(vcov(error_coef_PKU)))
 betas <- c(fix, fix.se)
-setwd("~/Dropbox/CulturalMetacognition-master/DATA/EXP1/PKU_data/PKU_data/PKU_betas/")
+setwd("~/Dropbox/CulturalMetacognition/DATA/EXP1/PKU_data/PKU_data/PKU_betas/")
 write.csv(betas, file = paste('regression_betas_err_PKU.csv'))
 
 # correct, PKU 
@@ -167,7 +167,7 @@ error_coef_UCL = lmer(conf ~ precoh_cat*postcoh_cat + logRT + (1 +  precoh_cat*p
 fix <- fixef(error_coef_UCL)
 fix.se <- sqrt(diag(vcov(error_coef_UCL)))
 betas <- c(fix, fix.se)
-setwd("~/Dropbox/CulturalMetacognition-master/DATA/EXP1/UCL_data/UCL_data/UCL_betas/")
+setwd("~/Dropbox/CulturalMetacognition/DATA/EXP1/UCL_data/UCL_data/UCL_betas/")
 write.csv(betas, file = paste('regression_betas_err_UCL.csv'))
 
 # correct, UCL

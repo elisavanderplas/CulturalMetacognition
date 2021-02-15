@@ -12,7 +12,7 @@ set(s05,'units','points','position',[10,10,1300,500])
 for n = 1:length(culture)
     nat = culture{n};
     
-    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition-master' fs 'DATA' fs 'EXP2' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition' fs 'DATA' fs 'EXP2' fs];
     dirData = [baseDir nat '_data' fs nat '_data' fs];
 
     filename = 'Data_sub_';   

@@ -13,13 +13,13 @@ j=1
 for (d in 1:2) {
   if (d == 1) {
     dataset = "PKU"
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/EXP2/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP2/PKU_data/PKU_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects = c(403, seq(404,418), seq(420,432), seq(434,435), seq(437,443), seq(445,459))
   } else if ( d == 2) {
     dataset = "UCL"
-    dataDir = "~/Dropbox/CulturalMetacognition-master/DATA/Exp2/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/CulturalMetacognition/DATA/Exp2/UCL_data/UCL_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects =c(seq(25,76), 79) 
@@ -156,7 +156,7 @@ err_a_PKU = lmer(conf_inv ~ precoh_cat*conf_adv_cat + logRT + (1 +  precoh_cat*c
 fix <- fixef(err_a_PKU)
 fix.se <- sqrt(diag(vcov(err_a_PKU)))
 betas <- c(fix, fix.se)
-setwd('~/Dropbox/CulturalMetacognition-master/DATA/EXP2/PKU_data/PKU_data/PKU_betas/')
+setwd('~/Dropbox/CulturalMetacognition/DATA/EXP2/PKU_data/PKU_data/PKU_betas/')
 write.csv(betas, file = paste('regression_betas_err_a_PKU.csv'))
 
 # correct-agree PKU 
@@ -173,7 +173,7 @@ err_da_PKU = lmer(conf_inv ~ precoh_cat*conf_adv_cat + logRT + (1 +  precoh_cat*
 fix <- fixef(err_da_PKU)
 fix.se <- sqrt(diag(vcov(err_da_PKU)))
 betas <- c(fix, fix.se)
-setwd('~/Dropbox/CulturalMetacognition-master/DATA/EXP2/PKU_data/PKU_data/PKU_betas/')
+setwd('~/Dropbox/CulturalMetacognition/DATA/EXP2/PKU_data/PKU_data/PKU_betas/')
 write.csv(betas, file = paste('regression_betas_err_da_PKU.csv'))
 
 # correct-disagree PKU 
@@ -190,7 +190,7 @@ err_a_UCL = lmer(conf_inv ~ precoh_cat*conf_adv_cat + logRT + (1 +  precoh_cat*c
 fix <- fixef(err_a_UCL)
 fix.se <- sqrt(diag(vcov(err_a_UCL)))
 betas <- c(fix, fix.se)
-setwd('~/Dropbox/CulturalMetacognition-master/DATA/EXP2/UCL_data/UCL_data/UCL_betas/')
+setwd('~/Dropbox/CulturalMetacognition/DATA/EXP2/UCL_data/UCL_data/UCL_betas/')
 write.csv(betas, file = paste('regression_betas_err_a_UCL.csv'))
 
 # correct, agree UCL
@@ -207,7 +207,7 @@ err_da_UCL = lmer(conf_inv ~ precoh_cat*conf_adv_cat + logRT + (1 +  precoh_cat*
 fix <- fixef(err_da_UCL)
 fix.se <- sqrt(diag(vcov(err_da_UCL)))
 betas <- c(fix, fix.se)
-setwd('~/Dropbox/CulturalMetacognition-master/DATA/EXP2/UCL_data/UCL_data/UCL_betas/')
+setwd('~/Dropbox/CulturalMetacognition/DATA/EXP2/UCL_data/UCL_data/UCL_betas/')
 write.csv(betas, file = paste('regression_betas_err_da_UCL.csv'))
 
 # correct, agree UCL
