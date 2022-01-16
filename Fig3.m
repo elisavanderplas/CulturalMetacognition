@@ -16,7 +16,7 @@ linestyle = {'d', 'o'};
 for n = 1:length(culture)
     nat = culture{n};
 
-    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'Github' fs 'CulturalMetacognition' fs];
     dirData = [baseDir 'DATA' fs 'EXP2' fs nat '_data' fs nat '_data' fs]; 
 
     filename = 'Data_sub_'; 
@@ -41,6 +41,8 @@ for n = 1:length(culture)
         task = locDATA.condition;
         acc_t = acc +1; 
         coherence = unique(precoh);
+        RT = log(locDATA.reaction_time_button);
+        trial_phase = [ones(length(acc)/2, 1)', 2.* ones(length(acc)/2, 1)']; 
         
         for i = 1:3
             precoh_index(locDATA.dots_coherence==coherence(i))=i;
@@ -81,10 +83,14 @@ for n = 1:length(culture)
         % compute how often adviser and participant resolve disagreement,
         % on trials on which the participant was initially wrong or correct
         for acy = 1:2
+            for phase = 1:2
             switch2adv_acc(n,s,acy) = (sum(task ==1 & agree == 0 & agree_post == 1 & acc_advt == acy));
             agree_pr_acc(n,s,acy) = (sum(task == 1 & agree == 0 & acc_advt == acy)); 
+            switch2adv_phase(n,s,phase) = (sum(task == 1 & agree == 0 & agree_post ==1 & trial_phase == phase));    
+            end
         end
         mean_conf(n,s) = nanmean(conf);
+        mean_rt(n,s) = nanmean(RT);
     end
     mean_acc_social = nanmean(accuracy_social); 
     sem_acc_social = nanstd(accuracy_social)./sqrt(length(subjects));
@@ -148,3 +154,12 @@ disp(['average compliance after having been initially correct in PKU : ' num2str
 disp(['average compliance after having been initially correct in UCL : ' num2str(mean(p_switch_acc(2,:,1)))]);
 [H,P,CI,STATS] = ttest2(p_switch_acc(1,:,1), p_switch_acc(2,:,1)); 
 disp(['compliance with correct advisers P-value: ' num2str(P)]);
+
+%line 414 of manuscript, basic RT differences
+nanmean(mean_rt(1,:))%get mean/sem, 1 = PKU, 2 = UCL
+nanstd(mean_rt(1,:)./sqrt(length(mean_rt(1,:))))
+[H,P,CI] = ttest2(mean_rt(1,:), mean_rt(2,:)); 
+
+% compliance across phases
+[H,P,CI,STATS] = ttest2(switch2adv_phase(1,:,1), switch2adv_phase(1,:,2)); 
+[H,P,CI,STATS] = ttest2(switch2adv_phase(2,:,1), switch2adv_phase(2,:,2)); 

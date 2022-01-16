@@ -12,7 +12,7 @@ c.err = [0.835, 0.250, 0.082];
 
 for n = 1:length(culture)
     nat = culture{n};
-    baseDir =  ['~' fs 'Dropbox' fs 'CulturalMetacognition' fs];
+    baseDir =  ['~' fs 'Dropbox' fs 'Github' fs 'CulturalMetacognition' fs];
     dirData = [baseDir 'DATA' fs 'EXP1' fs nat '_data' fs nat '_data' fs];
     
     filename = 'regression_betas_'; %made in R with 'Regression_EXP1.r'
@@ -87,6 +87,7 @@ for pre = 1:3
             set(h,'edgecolor',c.corr,'facealpha',.1,'LineStyle','none');
         end
         plot(x, squeeze(mu),marker{n}, 'markersize', ms-6, 'Color', c.corr, 'markerfacecolor', 'w', 'MarkerEdgeColor', c.corr, 'LineWidth', 4);
+        errorbar(x, squeeze(mu), squeeze(se), '.', 'Color', c.corr*0.1 , 'LineWidth', 2);
         
         %Error
         mu = nanmean(conf_err{n}(:,pre,:));
@@ -98,6 +99,8 @@ for pre = 1:3
             set(h,'edgecolor',c.err,'facealpha',.1,'LineStyle','none');
         end
         plot(x, squeeze(mu),marker{n}, 'markersize', ms-6, 'Color', c.err, 'markerfacecolor', 'w', 'MarkerEdgeColor', c.err, 'LineWidth', 4);
+        errorbar(x, squeeze(mu), squeeze(se), '.', 'Color', c.err*0.1 , 'LineWidth', 2);
+
     end
     
     %get lines to display in the legend
@@ -124,7 +127,6 @@ set(texthandle,'FontSize',20);
 
 %% Second Fig
 subplot(1,4,4)
-
 hold all; grid off; box off
 plot(1,  [dat{1,1}{3,2}] , 'd', 'MarkerSize', ms, 'MarkerFaceColor', c.corr,'Linewidth', 3, 'MarkerEdgeColor', c.corr);
 plot(1,  [dat{1,2}{3,2}] , 'd', 'MarkerSize', ms, 'MarkerFaceColor', c.err, 'Linewidth', 3, 'MarkerEdgeColor', c.err);
@@ -136,4 +138,3 @@ errorbar(1:2, [dat{1,2}{3,2} dat{2,2}{3,2}], [dat{1,2}{8,2} dat{2,2}{8,2}], '.',
 hline1 = line([0 22], [0,0], 'linestyle', '-', 'color', [0 0 0], 'linewidth', 0.7); %zeroline
 set(gca, 'XLim', [0 3], 'XTick', 1:2, 'XTickLabel',['PKU  '; '  UCL'], 'YLim', [-0.5 0.2],'YTick', -0.5:0.1:0.2, 'FontSize',axis_nr);
 ylabel([{'Post-decision evidence'};{'impact on confidence (a.u.)'}], 'FontSize', axis_text);
-

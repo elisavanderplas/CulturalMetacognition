@@ -15,13 +15,13 @@ j=1
 for (d in 1:2) {
   if (d == 1) {
     dataset = "PKU"
-    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP2/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/Github/CulturalMetacognition/DATA/EXP2/PKU_data/PKU_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects = c(403, seq(404,418), seq(420,432), seq(434,435), seq(437,443), seq(445,459))
   } else if ( d == 2) {
     dataset = "UCL"
-    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP2/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/Github/CulturalMetacognition/DATA/EXP2/UCL_data/UCL_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects =c(seq(25,76), 79) 
@@ -82,10 +82,11 @@ for (d in 1:2) {
 # Factors
 bigData$subj <- factor(bigData$subj)
 bigData$country <- factor(bigData$country, levels = c(1,2), labels = c("PKU","UCL"))
+bigData$condition <- factor(bigData$condition, levels = c(1,0), labels = c("social","nonsocial"))
 
 ## distinguish between social/nonsocial trials
-bigData_social <- bigData[bigData$condition == 1, ]
-bigData_nonsocial <- bigData[bigData$condition == 0, ]
+bigData_social <- bigData[bigData$condition == "social", ]
+bigData_nonsocial <- bigData[bigData$condition == "nonsocial", ]
 
 ## distinguish between error/correct trials
 bigData_err <- bigData_nonsocial[bigData_nonsocial$accuracy == -1, ]
@@ -136,6 +137,14 @@ mean(UCL$BCIS, na.rm = T)
 sd(UCL$BCIS, na.rm = T)/sqrt(length(subjects)) 
 t.test(PKU$BCIS, UCL$BCIS, var.equal = T)
 
+#NEW: simple site x evidence type interaction? 
+confModel_editor = lmer(accuracy ~ country*condition + (1 +  country + condition|subj), data=bigData
+                        , control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE)))
+fix <- fixef(confModel_editor)
+print(summary(confModel_editor))
+print(Anova(confModel_editor, type = 3))
+coef(summary(confModel_editor)) #get the contrast statistics
+
 ## SECOND-ORDER PERFORMANCE
 confModel_wcountry = lmer(conf ~ country*(accuracy + precoh_cat + postcoh_cat + precoh_cat:postcoh_cat + precoh_cat:accuracy + postcoh_cat:accuracy + precoh_cat:postcoh_cat:accuracy + logRT) + (1 + accuracy + precoh_cat + postcoh_cat + precoh_cat:postcoh_cat + precoh_cat:accuracy + postcoh_cat:accuracy + precoh_cat:postcoh_cat:accuracy + logRT|subj), data=bigData_nonsocial
                           , control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE, REML = FALSE)))
@@ -145,6 +154,14 @@ print(summary(confModel_wcountry))
 print(Anova(confModel_wcountry, type = 3))
 coef(summary(confModel_wcountry)) #get the contrast statistics
 fix.se <- sqrt(diag(vcov(confModel_wcountry)))
+
+#distinct effects of RT across countries?
+confModel_RT = lmer(conf ~ country*(logRT + accuracy + logRT:accuracy) + (1 +  accuracy + logRT|subj), data=bigData_nonsocial
+                    , control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE)))
+fix <- fixef(confModel_RT)
+print(summary(confModel_RT))
+print(Anova(confModel_RT, type = 3))
+coef(summary(confModel_RT)) #get the contrast statistics
 
 ## Get the beta coefficients per country (Fig 1D plotted)
 # error, PKU
@@ -192,4 +209,41 @@ confModel_correct = lmer(conf ~ country * (precoh_cat*postcoh_cat + logRT) + (1 
                          , control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE)))
 print(summary(confModel_correct))
 print(Anova(confModel_correct, type =3))
+
+##get the beta coefficients for correct/err RT, EXTRA 
+corr_UCL = lmer(conf ~ logRT + (1 + logRT|subj), data=bigData_UCL_correct,
+                control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE)))
+fix <- fixef(corr_UCL)
+fix.se <- sqrt(diag(vcov(corr_UCL)))
+betas <- c(fix, fix.se)
+setwd('~/Dropbox/Github/CulturalMetacognition/DATA/EXP2/UCL_data/UCL_data/UCL_betas/')
+write.csv(betas, file = paste('RT_corr_UCL.csv'))
+
+err_UCL = lmer(conf ~ logRT + (1 + logRT|subj), data=bigData_UCL_incorrect,
+               control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE)))
+fix <- fixef(err_UCL)
+fix.se <- sqrt(diag(vcov(err_UCL)))
+betas <- c(fix, fix.se)
+write.csv(betas, file = paste('RT_err_UCL.csv'))
+
+corr_PKU = lmer(conf ~ logRT + (1 + logRT|subj), data=bigData_PKU_correct,
+                control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE)))
+fix <- fixef(corr_PKU)
+fix.se <- sqrt(diag(vcov(corr_PKU)))
+betas <- c(fix, fix.se)
+setwd('~/Dropbox/Github/CulturalMetacognition/DATA/EXP2/PKU_data/PKU_data/PKU_betas/')
+write.csv(betas, file = paste('RT_corr_PKU.csv'))
+
+err_PKU = lmer(conf ~ logRT + (1 + logRT|subj), data=bigData_PKU_incorrect,
+               control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE)))
+fix <- fixef(err_PKU)
+fix.se <- sqrt(diag(vcov(err_PKU)))
+betas <- c(fix, fix.se)
+write.csv(betas, file = paste('RT_err_PKU.csv'))
+
+
+
+
+
+
 

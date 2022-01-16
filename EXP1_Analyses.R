@@ -6,21 +6,23 @@ require(R.matlab)
 require(lme4)
 require(car)
 require(optimx)
+require(pwr)
 options(contrasts = c("contr.treatment", "contr.poly")) # This is R defaults but set it anyway to be safe
 
 bigData = NULL
 demoData = NULL
+
 nat = c('PKU', 'UCL')
 
 j=1
 for (d in 1:2) {
   if (d == 1) {
-    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP1/PKU_data/PKU_data/"
+    dataDir = "~/Dropbox/Github/CulturalMetacognition/DATA/EXP1/PKU_data/PKU_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects =c(seq(101,109), seq(111,115), seq(117,141))
   } else if (d == 2) {
-    dataDir = "~/Dropbox/CulturalMetacognition/DATA/EXP1/UCL_data/UCL_data/"
+    dataDir = "~/Dropbox/Github/CulturalMetacognition/DATA/EXP1/UCL_data/UCL_data/"
     filePrefix = "Data_sub_"
     suffix = "_2"
     subjects = c(seq(201,204), seq(206, 227), seq(229, 234), seq(236,242))
@@ -126,6 +128,16 @@ accModel = glmer(accuracy_dv ~ country*precoh_cat + (1 + precoh_cat | subj), dat
 print(summary(accModel))
 print(Anova(accModel, type =3))
 
+## RT effects
+confModel_RT= lmer(conf ~ country* (logRT + accuracy + logRT*accuracy)  + (1 + accuracy + logRT|subj), data=bigData
+                      , control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE, REML = FALSE)))
+
+fix <- fixef(confModel_RT)
+print(summary(confModel_RT))
+print(Anova(confModel_RT, type = 3))
+coef(summary(confModel_RT)) #get the contrast statistics
+
+
 ## SECOND-ORDER PERFORMANCE
 confModel_nocountry = lmer(conf ~ accuracy + precoh_cat + postcoh_cat + precoh_cat:postcoh_cat + precoh_cat:accuracy + postcoh_cat:accuracy + precoh_cat:postcoh_cat:accuracy + logRT + (1 + accuracy + precoh_cat + postcoh_cat + precoh_cat:postcoh_cat + precoh_cat:accuracy + postcoh_cat:accuracy + precoh_cat:postcoh_cat:accuracy + logRT|subj), data=bigData
                         , control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE)))
@@ -142,6 +154,14 @@ fix.se <- sqrt(diag(vcov(confModel_wcountry))) ## 2-way interaction, no 3 way in
 ## check if including country as interaction improved the fit of the model (line 457)
 anova(confModel_nocountry,confModel_wcountry)
 
+# distinct effects of pre-decision evidence across countries?
+confModel_pre = lmer(conf ~ country + precoh_cat + precoh_cat:country + (1 +  precoh_cat + precoh_cat:country|subj), data=bigData
+                     , control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE)))
+fix <- fixef(confModel_pre)
+print(summary(confModel_pre))
+print(Anova(confModel_pre, type = 3))
+coef(summary(confModel_pre)) #get the contrast statistics
+fix.se <- sqrt(diag(vcov(confModel_pre))) ## 2-way interaction, no 3 way interaction, line 463 & 471
 
 ## Get the beta coefficients per country (Fig 1D plotted)
 # error, PKU
@@ -189,6 +209,4 @@ confModel_correct = lmer(conf ~ country * (precoh_cat*postcoh_cat + logRT) + (1 
                        , control = lmerControl(optimizer = "optimx", calc.derivs = FALSE, optCtrl = list(method = "bobyqa", starttests = FALSE, kkt = FALSE)))
 print(summary(confModel_correct))
 print(Anova(confModel_correct, type =3))
-
-
 
